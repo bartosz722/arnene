@@ -14,24 +14,31 @@ class NeuralNetwork:
         # It includes the output layer.
         self.layers = []
 
-    def initialize(self, structure, activation_function, weight_min, weight_max):
+    def __str__(self):
+        ret = 'Neural network, '
+        for layer in self.layers:
+            ret += 'layer, '
+            for n in layer:
+                ret += str(n)
+        return ret
+
+    def initialize(self, input_count, neuron_counts, activation_function, weight_min, weight_max):
         """
         Initialize the network.
-        :param structure: List of ints. The first element is the input count; the last element is
-        the output count. Optional elements in the middle describe the element counts of
-        the hidden layers.
+        :param input_count: Number of inputs.
+        :param neuron_counts: List of ints. It tells how many neurons are in each layer;
+        this does not include the input layer. The last element also defines the output count.
         :param activation_function:
         :param weight_min:
         :param weight_max:
         :return: None
         """
         assert self.layers == []  # Check if not initialized.
-        assert len(structure) >= 2
-        assert all(type(x) is int and x >= 1 for x in structure)
+        assert len(neuron_counts) >= 1
+        assert all(type(x) is int and x >= 1 for x in neuron_counts)
 
-        self.input_count = structure[0]
-        prev_layer_size = self.input_count
-        for curr_layer_size in structure[1:]:
+        prev_layer_size = self.input_count = input_count
+        for curr_layer_size in neuron_counts:
             neurons_in_layer = []
             for _ in range(curr_layer_size):
                 neuron = Neuron()
@@ -52,6 +59,9 @@ class NeuralNetwork:
                 curr_outputs.append(neuron_output)
             curr_inputs = curr_outputs
         return curr_inputs
+
+    def get_neuron(self, layer_number, neuron_number):
+        return self.layers[layer_number][neuron_number]
 
 
 def _get_random_float(min_value, max_value, value_count):

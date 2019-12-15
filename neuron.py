@@ -7,6 +7,9 @@ class Neuron:
         self.bias = 0
         self.activation_function = None
 
+    def __str__(self):
+        return 'Neuron, bias: {}, weights: {}'.format(self.bias, self.weights)
+
     def set_weights(self, weights, bias):
         self.weights = weights
         self.bias = bias

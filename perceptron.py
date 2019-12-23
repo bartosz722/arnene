@@ -23,6 +23,11 @@ def learn(perceptron, training_samples, learning_rate, learning_iterations, erro
     """
     log.info("Learning started")
     neuron = perceptron.get_neuron(0, 0)
+    assert len(perceptron.layers) == 1 and len(perceptron.layers[0]) == 1, \
+        'The neural network must have only one neuron'
+    assert all(len(s.inputs) == neuron.input_count for s in training_samples), \
+        'All samples must have {} inputs'.format(neuron.input_count)
+    assert all(len(s.outputs) == 1 for s in training_samples), 'All samples must have 1 output'
 
     for learn_i in range(learning_iterations):
         log.info("Iteration {}".format(learn_i + 1))
@@ -46,8 +51,10 @@ def learn(perceptron, training_samples, learning_rate, learning_iterations, erro
         mean_error = total_error_abs / float(len(training_samples))
         log.info("Mean error in this iteration: {}".format(mean_error))
         if mean_error <= error_threshold:
-            log.info("Reached the error threshold after iteration {}, stopping.".format(learn_i + 1))
+            log.info("Learning succeeded. Reached the wanted threshold after {} iterations."
+                     .format(learn_i + 1))
             return
 
-    log.info("Done all {} learning iterations, stopping.".format(learning_iterations))
+    log.info("Learning failed. Done all {} learning iterations."
+             .format(learning_iterations))
 

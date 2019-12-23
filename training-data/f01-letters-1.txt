@@ -1,0 +1,44 @@
+5,4
+
+ XXX
+X   X
+XXXXX
+X   X
+X   X
+1,0,0,0
+
+XXXX
+X   X
+XXXX
+X   X
+XXXX
+0,1,0,0
+
+XXXXX
+X
+X
+X
+XXXXX
+0,0,1,0
+
+XXX
+X  X
+X   X
+X  X
+XXX
+0,0,0,1
+
+XXXX
+X   X
+X   X
+X   X
+XXXX
+0,0,0,1
+
+XXXXX
+X   X
+XXXXX
+X   X
+X   X
+1,0,0,0
+

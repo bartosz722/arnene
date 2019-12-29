@@ -22,8 +22,9 @@ def main1():
 
 
 def main2():
-    p = perceptron.create_perceptron(
+    p = perceptron.create_perceptrons(
         2,
+        1,
         activation_functions.binary_step_unipolar,
         -1,
         1)
@@ -42,19 +43,17 @@ def main2():
 
 
 def main3():
-    p = perceptron.create_perceptron(
+    pp = perceptron.create_perceptrons(
         5*5,
+        4,
         activation_functions.binary_step_unipolar,
         -1,
         1)
     td = training_data_loader.load_f01('training-data/f01-letters-1.txt')
 
-    # TODO: multi-perceptron
-    print(p)
-    letter_idx = 0
-    tdx = [TrainingSample(x.inputs, [x.outputs[letter_idx]]) for x in td]
-    perceptron.learn(p, tdx, 0.1, 1000, 0.001)
-    print(p)
+    print(pp)
+    perceptron.learn(pp, td, 0.1, 1000, 0.001)
+    print(pp)
 
 
 main3()

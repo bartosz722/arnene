@@ -17,9 +17,9 @@ class NeuralNetwork:
     def __str__(self):
         ret = 'Neural network, '
         for layer in self.layers:
-            ret += 'layer, '
+            ret += 'Layer, '
             for n in layer:
-                ret += str(n)
+                ret += str(n) + ', '
         return ret
 
     def initialize(self, input_count, neuron_counts, activation_function, weight_min, weight_max):
@@ -50,6 +50,11 @@ class NeuralNetwork:
             prev_layer_size = curr_layer_size
 
     def calculate_outputs(self, inputs):
+        """
+        Calculate the outputs of the network.
+        :param inputs: Sequence of numbers
+        :return: Sequence of numbers.
+        """
         assert len(inputs) == self.input_count
         curr_inputs = inputs
         for curr_layer in self.layers:

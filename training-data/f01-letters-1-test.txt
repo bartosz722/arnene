@@ -1,0 +1,15 @@
+5,4
+
+XXXX
+X
+X
+X
+XXXX
+0,0,1,0
+
+XXXXX
+X  XX
+X  XX
+X  XX
+XXXX
+0,0,0,1

@@ -83,8 +83,8 @@ def learn(perceptron_network, training_samples, learning_rate, max_learning_iter
                     continue
                 neuron_error = _learn_using_sample(
                     neuron, sample, neuron_idx, learning_rate, error_threshold)
-                log.debug('Neuron {} error: {}'.format(neuron_idx, neuron_error))
                 if neuron_error is not None:
+                    log.debug('Neuron {} error: {}'.format(neuron_idx, neuron_error))
                     all_samples_ok_for_neuron[neuron_idx] = False
 
         # Check which neurons are trained enough.
@@ -102,3 +102,35 @@ def learn(perceptron_network, training_samples, learning_rate, max_learning_iter
             log.info("Learning failed. Done all {} learning iterations."
                      .format(max_learning_iterations))
             return False
+
+
+def test(perceptron_network, training_samples, error_threshold):
+    log.info('Testing the perceptron network.')
+    total_invalid_outputs = 0
+    visual = []  # error visualisation
+
+    for sample_idx, sample in enumerate(training_samples):
+        log.info('Testing sample {}'.format(sample_idx))
+        network_outputs = perceptron_network.calculate_outputs(sample.inputs)
+        visual_sample = ['-'] * len(network_outputs)
+        visual.append(visual_sample)
+
+        for output_idx, network_output in enumerate(network_outputs):
+            wanted_output = sample.outputs[output_idx]
+            error_abs = abs(wanted_output - network_output)
+            if error_abs > error_threshold:
+                log.info('Invalid output from neuron {}: {}; wanted output: {}; error: {}'
+                         .format(output_idx, network_output, wanted_output, error_abs))
+                total_invalid_outputs += 1
+                visual_sample[output_idx] = '*'
+
+    if total_invalid_outputs == 0:
+        log.info('All outputs are correct.')
+        return True
+    else:
+        log.info('Invalid outputs count: {}'.format(total_invalid_outputs))
+        log.info('Error visualisation (each line is one sample, * is an output error):')
+        for v in visual:
+            log.info(''.join(v))
+        return False
+

@@ -49,11 +49,14 @@ def main3():
         activation_functions.binary_step_unipolar,
         -1,
         1)
-    td = training_data_loader.load_f01('training-data/f01-letters-1.txt')
+    training_data = training_data_loader.load_f01('training-data/f01-letters-1.txt')
 
     print(pp)
-    perceptron.learn(pp, td, 0.1, 1000, 0.001)
+    perceptron.learn(pp, training_data, 0.1, 1000, 0.001)
     print(pp)
+
+    testing_data = training_data_loader.load_f01('training-data/f01-letters-1-test.txt')
+    perceptron.test(pp, testing_data, 0.1)
 
 
 main3()

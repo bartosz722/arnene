@@ -21,8 +21,8 @@ def load_f01(file_path):
 
         for line in f:
             line = line.rstrip()
-            if not line:
-                continue  # ignore empty lines
+            if not line or line[0] == '#':
+                continue  # ignore empty lines and comments
             if not curr_sample:
                 curr_sample = TrainingSample([0] * dim**2, [])
                 curr_sample_row = 0

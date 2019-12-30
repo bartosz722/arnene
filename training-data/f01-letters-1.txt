@@ -1,11 +1,38 @@
 5,4
 
+
+##### A #####
+
  XXX
 X   X
 XXXXX
 X   X
 X   X
 1,0,0,0
+
+XXXXX
+X   X
+XXXXX
+X   X
+X   X
+1,0,0,0
+
+ XXX
+X   X
+ XXXX
+X   X
+X   X
+1,0,0,0
+
+XXXX
+X   X
+XXXXX
+X   X
+X   X
+1,0,0,0
+
+
+##### B #####
 
 XXXX
 X   X
@@ -14,6 +41,15 @@ X   X
 XXXX
 0,1,0,0
 
+XXXX
+X   X
+XXXXX
+X   X
+XXXX
+0,1,0,0
+
+##### C #####
+
 XXXXX
 X
 X
@@ -21,6 +57,23 @@ X
 XXXXX
 0,0,1,0
 
+XXXX
+X
+X
+X
+XXXXX
+0,0,1,0
+
+XXXXX
+X
+X
+X
+XXXX
+0,0,1,0
+
+
+##### D #####
+
 XXX
 X  X
 X   X
@@ -35,10 +88,23 @@ X   X
 XXXX
 0,0,0,1
 
-XXXXX
-X   X
-XXXXX
-X   X
-X   X
-1,0,0,0
+XXX
+X  X
+X  XX
+X  X
+XXX
+0,0,0,1
 
+XXXXX
+X   X
+X   X
+X   X
+XXXX
+0,0,0,1
+
+XXXX
+X  XX
+X  XX
+X  XX
+XXXX
+0,0,0,1

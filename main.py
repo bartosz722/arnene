@@ -59,4 +59,21 @@ def main3():
     perceptron.test(pp, testing_data, 0.1)
 
 
-main3()
+def main4():
+    pp = perceptron.create_perceptrons(
+        5,
+        3,
+        activation_functions.binary_step_bipolar,
+        -1,
+        1)
+    training_data = training_data_loader.load_f02('training-data/f02-animals.txt')
+
+    print(pp)
+    perceptron.learn(pp, training_data, 0.1, 1000, 0.001)
+    print(pp)
+
+    testing_data = training_data_loader.load_f02('training-data/f02-animals-test.txt')
+    perceptron.test(pp, testing_data, 0.1)
+
+
+main4()

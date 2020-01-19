@@ -1,0 +1,31 @@
+Number of legs, Lives in water, Can fly, Has feathers, Egg-laying
+Mammal, Bird, Fish
+
+
+### Mammals
+
+Fox
+4, -1, -1, -0.9, -1
+1, -1, -1
+
+Human
+2, -1, -1, -1, -1
+1, -1, -1
+
+
+### Birds
+
+Eagle
+2, -1, 1, 1, 1
+-1, 1, -1
+
+Duck
+2, 0.3, 0.5, 1, 1
+-1, 1, -1
+
+
+### Fishes
+
+Shark
+-1, 1, -1, -1, 1
+-1, -1, 1

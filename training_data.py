@@ -1,7 +1,7 @@
 class TrainingSample:
     def __init__(self, inputs, outputs):
         """
-        Training data.
+        Training sample.
         :param inputs: Sequence of numbers.
         :param outputs: Sequence of numbers.
         """

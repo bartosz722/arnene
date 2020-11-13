@@ -4,7 +4,7 @@ import random
 
 class NeuralNetwork:
     def __init__(self):
-        """Create an uninitialized neuron."""
+        """Create an uninitialized neural network."""
 
         self.input_count = 0
 

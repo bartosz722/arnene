@@ -6,7 +6,7 @@ import random
 def create_perceptrons(input_count, output_count, activation_function, weight_min, weight_max):
     """Create a neural network with one ore more perceptrons."""
     nn = NeuralNetwork()
-    nn.initialize(input_count, [output_count], activation_function, weight_min, weight_max)
+    nn.initialize(input_count, [output_count], activation_function, None, weight_min, weight_max)
     return nn
 
 

@@ -22,13 +22,15 @@ class NeuralNetwork:
                 ret += str(n) + ', '
         return ret
 
-    def initialize(self, input_count, neuron_counts, activation_function, weight_min, weight_max):
+    def initialize(self, input_count, neuron_counts, activation_function,
+                   activation_function_derivative, weight_min, weight_max):
         """
         Initialize the network.
         :param input_count: Number of inputs.
         :param neuron_counts: List of ints. It tells how many neurons are in each layer;
         this does not include the input layer. The last element also defines the output count.
         :param activation_function:
+        :param activation_function_derivative: May be None.
         :param weight_min:
         :param weight_max:
         :return: None
@@ -44,7 +46,7 @@ class NeuralNetwork:
                 neuron = Neuron()
                 weights = _get_random_float(weight_min, weight_max, prev_layer_size + 1)
                 neuron.set_weights(weights[:-1], weights[-1])
-                neuron.set_activation_function(activation_function)
+                neuron.set_activation_function(activation_function, activation_function_derivative)
                 neurons_in_layer.append(neuron)
             self.layers.append(neurons_in_layer)
             prev_layer_size = curr_layer_size

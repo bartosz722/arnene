@@ -5,6 +5,7 @@ import perceptron
 import log
 from training_data import TrainingSample
 import training_data_loader
+import backpropagation as bp
 
 
 def main1():
@@ -76,4 +77,10 @@ def main4():
     perceptron.test(pp, testing_data, 0.1)
 
 
-main4()
+def main5():
+    nn = neural_network.NeuralNetwork()
+    nn.initialize(3, [4, 3, 2], activation_functions.arc_tan, None, -1, 1)
+    bp.learning_step(nn, TrainingSample([1, 2, 3], [4, 5]))
+
+
+main5()

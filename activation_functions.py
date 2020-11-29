@@ -22,3 +22,11 @@ def binary_step_bipolar(x):
 def arc_tan(x):
     return math.atan(x)
 
+
+def sigmoid(x):
+    return 1.0 / (1.0 + math.e ** -x)
+
+
+def sigmoid_prime(x):
+    return sigmoid(x) * (1 - sigmoid(x))
+

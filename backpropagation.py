@@ -8,7 +8,7 @@ import log
 
 # noinspection PyTypeChecker
 def learning_step(network: NeuralNetwork, sample: TrainingSample, eta: float):
-    outputs: List[List[float]] = network.calculate_internal_outputs(sample.inputs)  # todo: [layer][out_number]
+    outputs: List[List[float]] = network.calculate_intermediate_outputs(sample.inputs)
     diffs: List[List[float]] = [None] * len(network.layers)
     diffs[len(network.layers) - 1] = mu.seq_subtr(sample.outputs, outputs[len(network.layers) - 1])
 
@@ -22,6 +22,8 @@ def learning_step(network: NeuralNetwork, sample: TrainingSample, eta: float):
     inputs = [list(sample.inputs)] + outputs[:-1]
     for i in range(len(network.layers)):
         _adjust_weights(network.layers[i], inputs[i], diffs[i], eta)
+
+    # TODO: bias
 
 
 def _get_diff_for_prev_layer(diff, layer):

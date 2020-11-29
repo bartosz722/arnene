@@ -55,17 +55,31 @@ class NeuralNetwork:
         """
         Calculate the outputs of the network.
         :param inputs: Sequence of numbers
-        :return: Sequence of numbers.
+        :return: List of numbers.
         """
         assert len(inputs) == self.input_count
         curr_inputs = inputs
         for curr_layer in self.layers:
-            curr_outputs = []
-            for curr_neuron in curr_layer:
-                neuron_output = curr_neuron.calculate_output(curr_inputs)
-                curr_outputs.append(neuron_output)
-            curr_inputs = curr_outputs
+            curr_inputs = self._calculate_layer_outputs(curr_layer, curr_inputs)
         return curr_inputs
+
+    def calculate_intermediate_outputs(self, inputs):
+        """
+        Calculate outputs of each layer of the network.
+        :param inputs: Sequence of numbers
+        :return: List of lists of numbers. Indexes: [layer][output].
+        """
+        assert len(inputs) == self.input_count
+        ret = []
+        curr_inputs = inputs
+        for curr_layer in self.layers:
+            curr_inputs = self._calculate_layer_outputs(curr_layer, curr_inputs)
+            ret.append(curr_inputs)
+        return ret
+
+    @staticmethod
+    def _calculate_layer_outputs(layer, inputs):
+        return [neuron.calculate_output(inputs) for neuron in layer]
 
     def get_neuron(self, layer_number, neuron_number):
         return self.layers[layer_number][neuron_number]

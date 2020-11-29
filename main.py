@@ -79,8 +79,8 @@ def main4():
 
 def main5():
     nn = neural_network.NeuralNetwork()
-    nn.initialize(3, [4, 3, 2], activation_functions.arc_tan, None, -1, 1)
-    bp.learning_step(nn, TrainingSample([1, 2, 3], [4, 5]))
+    nn.initialize(3, [4, 3, 2], activation_functions.sigmoid, activation_functions.sigmoid_prime, -1, 1)
+    bp.learning_step(nn, TrainingSample([1, 2, 3], [4, 5]), 0.2)
 
 
 main5()

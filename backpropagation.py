@@ -1,3 +1,4 @@
+from typing import List
 from neural_network import NeuralNetwork
 from neuron import Neuron
 from training_data import TrainingSample
@@ -5,17 +6,22 @@ import math_utils as mu
 import log
 
 
-def learning_step(network: NeuralNetwork, sample: TrainingSample):
-    net_out = network.calculate_outputs(sample.inputs)
-    prev_diff = mu.seq_subtr(sample.outputs, net_out)
+# noinspection PyTypeChecker
+def learning_step(network: NeuralNetwork, sample: TrainingSample, eta: float):
+    outputs: List[List[float]] = network.calculate_internal_outputs(sample.inputs)  # todo: [layer][out_number]
+    diffs: List[List[float]] = [None] * len(network.layers)
+    diffs[len(network.layers) - 1] = mu.seq_subtr(sample.outputs, outputs[len(network.layers) - 1])
 
-    for i in reversed(range(len(network.layers))):
-        curr_layer = network.layers[i]
-        diff = prev_diff
-        log.debug('learning_step(): layer {} diff: {}'.format(i, diff))
-        if i >= 1:
-            prev_diff = _get_diff_for_prev_layer(diff, curr_layer)
-        _adjust_weights(curr_layer, diff)
+    # Move backward and calculate differences.
+    for i in reversed(range(1, len(network.layers))):
+        diffs[i - 1] = _get_diff_for_prev_layer(diffs[i], network.layers[i])
+    for i in range(len(network.layers)):
+        log.debug('learning_step(): layer {} diff: {}'.format(i, diffs[i]))
+
+    # Move forward.
+    inputs = [list(sample.inputs)] + outputs[:-1]
+    for i in range(len(network.layers)):
+        _adjust_weights(network.layers[i], inputs[i], diffs[i], eta)
 
 
 def _get_diff_for_prev_layer(diff, layer):
@@ -37,5 +43,8 @@ def _get_diff_for_prev_layer(diff, layer):
     return ret
 
 
-def _adjust_weights(layer, diff):
-    pass  # todo
+def _adjust_weights(layer: List[Neuron], layer_input: List[float], layer_diff: List[float], eta: float):
+    for neuron, diff in zip(layer, layer_diff):
+        for wi in range(len(neuron.weights)):
+            neuron.weights[wi] += eta * neuron.activation_function_derivative(layer_input[wi])
+
